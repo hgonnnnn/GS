@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GS에너지 모작</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- 슬라이드 -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- 업버튼 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script> //jquery
+        $(function () {
+            let Top = $('.jquery_btn');
+            Top.click(function () {
+                $('html, body').animate({
+                    scrollTop: 0
+                });
+            });
+        });
+    </script>
+    <script>
+        window.onload = () => {
+            let depth01 = document.querySelectorAll('.gnb > li ');
+            let depth02 = document.querySelectorAll('.depth02');
+            let lang = document.querySelector('.lang');
+            let section01 = document.querySelector('.section01');
+            let bg = document.querySelectorAll('.bg div');
+            let item = document.querySelectorAll('.section01 .item');
+            let header = document.querySelector('.header');
+            // let section03 = document.querySelector('.section03');
+            // let section03Item = section03.querySelector('.inner');
+            // let section03Top = section03.offsetTop;
+            // let contTop = cont.offsetTop;
+            // let contItem = document.querySelector('.section01')
+            // let sec2title = document.querySelector('.section02 .title');
+            // console.log(cont.offsetTop);
+
+            window.addEventListener('wheel', (event) => {
+                let wheelscroll = event.deltaY;
+                if (wheelscroll > 0) {
+                    header.classList.add('on');
+                } else {
+                    header.classList.remove('on');
+                }
+            }); //헤더 나타나고 사라지기
+
+            window.addEventListener('scroll', () => {
+                let scrollBar = window.scrollY;
+                console.log(scrollBar);
+
+                for (let i = 0; i < item.length; i++) {
+                    let itemTop = item[i].offsetTop;
+                    let itemHeight = item[i].clientHeight;
+
+                    if (scrollBar >= itemTop + itemHeight) {
+                        bg.forEach((bgIndex) => {
+                            bgIndex.classList.remove('on');
+                        });
+                        item.forEach((itemIndex) => {
+                            itemIndex.classList.remove('on');
+                        });
+                        bg[i].classList.add('on');
+                        item[i].classList.add('on');
+                    }
+                };
+
+                // if(section03Top <= scrollBar) {
+                //     section03Item.forEach((item) => {
+                //         item.classList.add('on');
+                //     })
+                // }else if (scrollBar === 0) {
+                //     section03Item.forEach((item) => {
+                //         item.classList.remove('on');
+                //     })
+                // }
+
+            }); // 스크롤 시 백그라운드 변화
+
+            lang.addEventListener('click', () => {
+                lang.classList.toggle('on'); // toggle => 버튼형식 add, remove 가능
+            });
+
+
+            for (let i = 0; i < depth01.length; i++) {
+                depth01[i].addEventListener('mouseenter', () => {
+                    depth01.forEach((depth01Index) => {
+                        depth01Index.classList.remove('on');
+                    });
+                    depth02.forEach((dep02Index) => {
+                        dep02Index.classList.remove('on');
+                    });
+                    depth01[i].classList.add('on');
+                    depth02[i].classList.add('on');
+                });
+
+                depth01[i].addEventListener('mouseleave', () => {
+                    depth01.forEach((depth01Index) => {
+                        depth01Index.classList.remove('on');
+                    });
+                    depth02.forEach((depth02Index) => {
+                        depth02Index.classList.remove('on');
+                    });
+                });
+            } // 헤더 2차메뉴 hover
+
+            const progressCircle = document.querySelector(".autoplay-progress svg");
+            const progressContent = document.querySelector(".autoplay-progress span");
+            var swiper = new Swiper(".Swiper01", {
+                spaceBetween: 30,
+                centeredSlides: true,
+                autoplay: {
+                    delay: 2500,
+                    disableOnInteraction: false
+                },
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true
+                },
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev"
+                },
+                on: {
+                    autoplayTimeLeft(s, time, progress) {
+                        progressCircle.style.setProperty("--progress", 1 - progress);
+                        progressContent.textContent = `${Math.ceil(time / 1000)}s`;
+                    }
+                }
+            });
+        }; // script end
+    </script>
+</head>
+
+<body>
+    <button class="jquery_btn">
+        <img src="img/icons8-원-셰브론-up-48.png" alt="">
+    </button><!-- .jquery_btn end -->
+    <header class="header">
+        <div class="inner">
+            <figure class="logo">
+                <a href="#">
+                    <img src="img/logo_g.png" alt="로고">
+                </a>
+            </figure><!-- .logo end -->
+            <nav class="pc_nav pc">
+                <ul class="gnb">
+                    <li>
+                        <a href="#" class="depth01">Company</a>
+                        <ul class="depth02">
+                            <li><a href="#">CEO 인사말</a></li>
+                            <li><a href="#">GS에너지 소개</a></li>
+                            <li><a href="#">연혁</a></li>
+                            <li><a href="#">Contact US</a></li>
+                            <li><a href="#">재무정보</a></li>
+                            <li><a href="#">Global Inverstments</a></li>
+                        </ul><!-- .depth02 end -->
+                    </li>
+                    <li>
+                        <a href="#" class="depth01">ESG</a>
+                        <ul class="depth02">
+                            <li><a href="#">ESG 추진체계</a></li>
+                            <li><a href="#">ESG 정책</a></li>
+                            <li><a href="#">핵심가치</a></li>
+                            <li><a href="#">Environmental</a></li>
+                            <li><a href="#">Social</a></li>
+                            <li><a href="#">Govemance</a></li>
+                            <li><a href="#">지속가능경영보고서</a></li>
+                        </ul><!-- .depth02 end -->
+                    </li>
+                    <li>
+                        <a href="#" class="depth01">Beyond</a>
+                        <ul class="depth02">
+                            <li><a href="#">스마트 전력솔루션</a></li>
+                            <li><a href="#">청정수소 경제인프라</a></li>
+                            <li><a href="#">순환자원 생태계</a></li>
+                            <li><a href="#">그린발전 포트폴리오</a></li>
+                        </ul><!-- .depth02 end -->
+                    </li>
+                    <li>
+                        <a href="#" class="depth01">Business</a>
+                        <ul class="depth02">
+                            <li><a href="#">전력·집단에너지</a></li>
+                            <li><a href="#">정유·화학</a></li>
+                            <li><a href="#">가스</a></li>
+                            <li><a href="#">자원개발</a></li>
+                            <li><a href="#">Beyond</a></li>
+                        </ul><!-- .depth02 end -->
+                    </li>
+                    <li>
+                        <a href="#" class="depth01">Media</a>
+                        <ul class="depth02">
+                            <li><a href="#">보도자료</a></li>
+                            <li><a href="#">CI & 디자인</a></li>
+                        </ul><!-- .depth02 end -->
+                    </li>
+                    <li>
+                        <a href="#" class="depth01">Careers</a>
+                        <ul class="depth02">
+                            <li><a href="#">일하는 방식</a></li>
+                            <li><a href="#">인사/복지제도</a></li>
+                            <li><a href="#">채용가이드</a></li>
+                            <li><a href="#">채용공고</a></li>
+                            <li><a href="#">업무소개</a></li>
+                        </ul><!-- .depth02 end -->
+                    </li>
+                </ul><!-- .gnb end -->
+            </nav><!-- .pc_nav end -->
+            <div class="util pc">
+                <ul class="lang">
+                    <li>
+                        <a href="#">
+                            <img src="img/icons8-지구-50.png" alt="">
+                            <strong>KR</strong>
+                        </a>
+                        <ul>
+                            <li><strong>KR</strong></li>
+                            <li><strong>EN</strong></li>
+                        </ul>
+                    </li>
+                    <button class="menu pc">
+                        <img src="img/icons8-메뉴-32.png" alt="">
+                    </button>
+                </ul><!-- .lang end -->
+            </div><!-- .util end -->
+
+            <button class="menu_open mobile">
+                <img src="img/icons8-메뉴-32.png" alt="">
+            </button>
+            <nav class="mobile_nav mobile">
+                <button class="close">
+                    <img src="img/icons8-지우다-48.png" alt="">
+                </button>
+                <ul class="gnb">
+                    <li>
+                        <a href="#" class="depth01">Company</a>
+                        <ul class="depth02">
+                            <li><a href="#">CEO 인사말</a></li>
+                            <li><a href="#">GS에너지 소개</a></li>
+                            <li><a href="#">연혁</a></li>
+                            <li><a href="#">Contact US</a></li>
+                            <li><a href="#">재무정보</a></li>
+                            <li><a href="#">Global Inverstments</a></li>
+                        </ul><!-- .depth02 end -->
+                    </li>
+                    <li>
+                        <a href="#" class="depth01">ESG Management</a>
+                        <ul class="depth02">
+                            <li><a href="#">ESG 추진체계</a></li>
+                            <li><a href="#">ESG 정책</a></li>
+                            <li><a href="#">핵심가치</a></li>
+                            <li><a href="#">Environmental</a></li>
+                            <li><a href="#">Social</a></li>
+                            <li><a href="#">Govemance</a></li>
+                            <li><a href="#">지속가능경영보고서</a></li>
+                        </ul><!-- .depth02 end -->
+                    </li>
+                    <li>
+                        <a href="#" class="depth01">Beyond</a>
+                        <ul class="depth02">
+                            <li><a href="#">스마트 전력솔루션</a></li>
+                            <li><a href="#">청정수소 경제인프라</a></li>
+                            <li><a href="#">순환자원 생태계</a></li>
+                            <li><a href="#">그린발전 포트폴리오</a></li>
+                        </ul><!-- .depth02 end -->
+                    </li>
+                    <li>
+                        <a href="#" class="depth01">Business</a>
+                        <ul class="depth02">
+                            <li><a href="#">전력·집단에너지</a></li>
+                            <li><a href="#">정유·화학</a></li>
+                            <li><a href="#">가스</a></li>
+                            <li><a href="#">자원개발</a></li>
+                            <li><a href="#">Beyond</a></li>
+                        </ul><!-- .depth02 end -->
+                    </li>
+                    <li>
+                        <a href="#" class="depth01">Media Center</a>
+                        <ul class="depth02">
+                            <li><a href="#">보도자료</a></li>
+                            <li><a href="#">CI & 디자인</a></li>
+                        </ul><!-- .depth02 end -->
+                    </li>
+                    <li>
+                        <a href="#" class="depth01">Careers</a>
+                        <ul class="depth02">
+                            <li><a href="#">일하는 방식</a></li>
+                            <li><a href="#">인사/복지제도</a></li>
+                            <li><a href="#">채용가이드</a></li>
+                            <li><a href="#">채용공고</a></li>
+                            <li><a href="#">업무소개</a></li>
+                        </ul><!-- .depth02 end -->
+                    </li>
+                </ul>
+            </nav>
+
+        </div> <!-- .inner end -->
+    </header> <!-- .header end -->
+
+    <div class="swiper Swiper01">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <video autoplay loop muted>
+                    <source src="img/main_video.mp4" type="video/mp4" />
+                </video>
+                <div class="text">
+                    <h4>Total Energy Solution</h4>
+                    <p>미래 신성장 사업기반의 토탈 에너지 솔루션을 추구합니다.</p>
+                </div><!-- .text end -->
+            </div><!-- .swiper-slide end -->
+            <div class="swiper-slide">
+                <figure>
+                    <img src="img/qingbao-meng-01_igFr7hd4-unsplash.jpg" alt="">
+                </figure>
+                <div class="text">
+                    <h4>Total Energy Solution</h4>
+                    <p>We pursue total energy solutions based on future new growth businesses.</p>
+                </div><!-- .text end -->
+            </div><!-- .swiper-slide end -->
+            <div class="swiper-slide">
+                <figure>
+                    <img src="img/ca4338b96b0124e4414ca8f08007c6c2.jpg" alt="">
+                </figure>
+                <div class="text">
+                    <h4>Efforts for<br> Sustainable Growth</h4>
+                    <p>We create a sustainable future through ESG management.</p>
+                </div><!-- .text end -->
+            </div><!-- .swiper-slide end -->
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+        <div class="autoplay-progress">
+            <svg viewBox="0 0 48 48">
+                <circle cx="24" cy="24" r="20"></circle>
+            </svg>
+            <span></span>
+        </div>
+    </div><!-- .Swiper01 end -->
+
+    <section class="section01">
+        <div class="bg">
+            <div class="bg01"></div>
+            <div class="bg02"></div>
+            <div class="bg03"></div>
+            <div class="bg04"></div>
+        </div><!-- .bg end -->
+
+        <div class="inner">
+            <div class="title">
+                <p>OUR BUSINESS</p>
+                <h2>사업소개</h2>
+            </div><!-- .title end -->
+
+            <div class="list">
+                <div class="item">
+                    <div class="text">
+                        <p>OVERVIEW</p>
+                        <p>01</p>
+                    </div><!-- .text end -->
+                    <a href="#">
+                        <img src="img/icons8-전력-64 (1).png" alt="">
+                        <strong>전력·집단에너지 사업</strong>
+                        <span>쾌적한 환경의 열병합 발전소</span>
+                        <p>GS에너지는 GS파워의 열병합발전소를 통해 전기와 열을 생산하고 있으며, 특히 생산된 열을 안양과 부천 신도시를 중심으로 독점 공급하고 있습니다. </p>
+                    </a>
+                </div><!-- .item end -->
+                <div class="item">
+                    <div class="text">
+                        <p>OVERVIEW</p>
+                        <p>02</p>
+                    </div><!-- .text end -->
+                    <a href="#">
+                        <img src="img/icons8-가솔린-100.png" alt="">
+                        <strong>정유·화학 사업</strong>
+                        <p>GS에너지는 세계 최고 수준의 정유·석유화학회사인 GS칼텍스를 통해 정유, 석유화학 및 윤활유 사업에서 세계적인 경쟁력을 확보하고 있습니다.</p>
+                    </a>
+                </div><!-- .item end -->
+                <div class="item">
+                    <div class="text">
+                        <p>OVERVIEW</p>
+                        <p>03</p>
+                    </div><!-- .text end -->
+                    <a href="#">
+                        <img src="img/icons8-화재-요소-96.png" alt="">
+                        <strong>가스 사업</strong>
+                        <p>GS에너지는 LNG 직수입을 위한 트레이딩 법인설립 및 LNG 인수기지 운영 등을 통해 LNG 사업의 기틀을 마련했습니다.</p>
+                    </a>
+                </div><!-- .item end -->
+                <div class="item">
+                    <div class="text">
+                        <p>OVERVIEW</p>
+                        <p>04</p>
+                    </div><!-- .text end -->
+                    <a href="#">
+                        <img src="img/icons8-개발-64.png" alt="">
+                        <strong>자원개발</strong>
+                        <p>GS에너지는 적극적인 해외 자원개발사업을 통해 국가 자주개발률 향상 및 에너지수급 안정에 기여하고 있습니다.</p>
+                    </a>
+                </div><!-- .item end -->
+
+            </div><!-- .list end -->
+
+        </div><!-- .inner end -->
+    </section><!-- .section01 end -->
+
+    <section class="section02">
+        <div class="inner">
+            <div class="title">
+                <p>ESG management</p>
+                <h2>ESG 경영</h2>
+            </div><!-- .title end -->
+
+            <div class="item_wrap">
+                <div class="item">
+                    <figure>
+                        <img src="img/img_mc02_02.jpg" alt="">
+                    </figure>
+                    <p>Social</p>
+                </div><!-- .item end -->
+                <div class="item">
+                    <figure>
+                        <img src="img/img_mc02_01.jpg" alt="">
+                    </figure>
+                    <p>Environmental</p>
+                </div><!-- .item end -->
+                <div class="item">
+                    <figure>
+                        <img src="img/img_mc02_03.jpg" alt="">
+                    </figure>
+                    <p>Govemance</p>
+                </div><!-- .item end -->
+            </div><!-- .item_wrap end -->
+
+        </div><!-- .inner end -->
+    </section><!-- .section02 end -->
+
+    <section class="section03">
+        <div class="inner">
+
+            <!-- <div class="back"></div> -->
+            <div class="title">
+                <p>Media</p>
+                <h2>GS STORY</h2>
+            </div><!-- .title end -->
+
+            <div class="item_wrap">
+                <figure>
+                    <img src="img/전기1.jpg" alt="">
+                </figure>
+                <div class="item">
+                    <figure>
+                        <img src="img/img_ci.png" alt="">
+                    </figure>
+                    <div class="text">
+                        <strong>Coporate Identity</strong>
+                        <p>GS에너지는 우리나라를 대표하는 에너지기업을 넘어<br>
+                            글로벌 에너지 기업으로 비상하기 위해 최선을 다하겠습니다.
+                        </p>
+                        <button>더 알아보기</button>
+                    </div>
+                </div><!-- .item end -->
+            </div><!-- .item_wrap end -->
+
+        </div><!-- .inner end -->
+    </section><!-- .section03 end -->
+
+    <footer class="footer">
+        <div class="inner">
+            <div class="left">
+                <figure>
+                    <img src="img/logo.svg" alt="">
+                </figure>
+                <strong>Total Energy Solution</strong>
+                <p class="first">
+                    <span>개인정보처리방침</span>
+                    <span>법적고지</span>
+                    <span>이메일부단수집거부</span>
+                </p>
+                <p><span>서울시 강남구 논현로 508 (역삼동 GS타워)</span>
+                    <span>Email : gsenergy@gsenergy.co.kr</span>
+                </p>
+            </div><!-- .left end -->
+            <div class="right">
+                <ul>
+                    <li>
+                        <div>Company</div>
+                        <a href="#">CEO 인사말</a>
+                        <a href="#">GS에너지 소개</a>
+                        <a href="#">연혁</a>
+                        <a href="#">Contact Us</a>
+                        <a href="#">재무정보</a>
+                        <a href="#">Global Investments</a>
+                    </li>
+                    <li>
+                        <div>ESG</div>
+                        <a href="#">ESG 추진체계</a>
+                        <a href="#">ESG 정책</a>
+                        <a href="#">핵심가치</a>
+                        <a href="#">Environmental</a>
+                        <a href="#">Social</a>
+                        <a href="#">Govemance</a>
+                        <a href="#">지속가능경영보고서</a>
+                    </li>
+                    <li>
+                        <div>Beyond</div>
+                        <a href="#">스마트 전력솔루션</a>
+                        <a href="#">청정수소 경제인프라</a>
+                        <a href="#">순환자원 생태계</a>
+                        <a href="#">그린발전 포트폴리오</a>
+                    </li>
+                    <li>
+                        <div>Business</div>
+                        <a href="#">전력·집단에너지</a>
+                        <a href="#">정유·화학</a>
+                        <a href="#">가스</a>
+                        <a href="#">자원개발</a>
+                        <a href="#">Beyond</a>
+                    </li>
+                    <li>
+                        <div>Media</div>
+                        <a href="#">보도자료</a>
+                        <a href="#">CI & 디자인</a>
+                    </li>
+                    <li>
+                        <div>Careers</div>
+                        <a href="#">일하는 방식</a>
+                        <a href="#">인사/복지제도</a>
+                        <a href="#">채용가이드</a>
+                        <a href="#">채용공고</a>
+                        <a href="#">업무소개</a>
+                    </li>
+                </ul>
+            </div><!-- .right end -->
+        </div><!-- .inner end -->
+    </footer><!-- .footer end -->
+</body>
+
+</html>
