@@ -120,7 +120,7 @@ video {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(5px);
 
     transition: 0.5s;
@@ -171,7 +171,8 @@ video {
 }
 .header .inner .pc_nav .gnb .depth02 {
     box-shadow: 0px 2px 5px;
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.85);
+
     position: absolute;
     top: 100%;
     left: 0;
@@ -185,9 +186,8 @@ video {
 }
 .header .inner .pc_nav .gnb .depth02 li {
     width: 150px;
-    padding: 20px 0;
-    margin: 0 20px;
-    border-top: 3px dotted rgba(12, 12, 12, 0.3);
+    padding: 15px 0px;
+    margin: 0px 20px;
     transition: 0.2s;
 }
 .header .inner .pc_nav .gnb .depth02 li:first-child {
