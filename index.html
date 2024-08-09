@@ -16,7 +16,7 @@
 
     <script> //jquery
 
-        /* 맨 상단으로 올라가는 버튼 */
+
         $(function () {
             let topBtn = $('.jquery_btn');
             let menuIcon = $('.menu');
@@ -46,14 +46,17 @@
                 }
             });
 
-            /* 모바일메뉴 옆 공간을 눌러도 닫아짐 */
+            /* 모바일메뉴 옆 오른쪽 백그라운드를 눌러도 닫아짐 */
             $('.bgg').click(function () {
                 $('.bgg').removeClass('on');
                 $('.mobile_nav').slideUp();
                 $('html, body').removeClass('on');
                 $('.menu_img').attr('src', 'img/icons8-메뉴-32.png');
                 $('.header').removeAttr('style');
-                // $('body').off('scroll touchmove mousewheel')
+                $('.header').removeClass('on');
+
+                $('body').off('scroll touchmove mousewheel');
+                $('body').removeClass('on');
             })
 
             /* 메뉴버튼 클릭 시 모바일메뉴 나타내기 */
@@ -65,32 +68,38 @@
                     $('.header').css({
                         'opacity': '1',
                         'transform': 'translateY(0)'
-                    })
+                    });
+                    /* 마우스 휠 막기 */
+                    $('body').on('scroll touchmove mousewheel', function () {
+                        return false;
+                    });
+                    $('body').addClass('on');
                 } else {
                     $('.header').removeAttr('style');
+                    $('.header').removeClass('on');
+                    /* 마우스 휠 막기 */
+                    $('body').off('scroll touchmove mousewheel');
+                    $('body').removeClass('on');
                 }
-                
+                /* 메뉴 나타내기 & 오른쪽 백그라운드 나타내기 */
                 $('.mobile_nav').slideToggle();
                 $('.bgg').toggleClass('on');
-                $('html, body').toggleClass('on');
-                // $('body').on('scroll touchmove mousewheel', function(){
-                //     return false;
-                // });
-                
-                // 2차메뉴 열고 닫아도 초기화 되도록 설정
+
+                /* 2차메뉴 열고 모바일메뉴 닫아도 초기화 되도록 설정 */
                 mobileDepth01.css({
                     'color': '#000'
-                })
+                });
                 mobileDepth02.css({
                     'display': 'none',
-                })
-
+                });
+                /* 메뉴버튼 누르면 닫기 아이콘으로 변경되도록 설정 */
                 if ($('.menu_img').attr('src') === 'img/icons8-메뉴-32.png') {
                     $('.menu_img').attr('src', 'img/icons8-지우다-48.png');
                 } else {
                     $('.menu_img').attr('src', 'img/icons8-메뉴-32.png');
-                }
+                };
             });
+
             /* 1차메뉴 클릭 시 2차메뉴 나타내기 */
             mobileDepth01.click(function () {
                 if ($(this).next().css('display') === 'none') {
@@ -123,13 +132,6 @@
             let bg = document.querySelectorAll('.bg div');
             let item = document.querySelectorAll('.section01 .item');
             let header = document.querySelector('.header');
-            // let section03 = document.querySelector('.section03');
-            // let section03Item = section03.querySelector('.inner');
-            // let section03Top = section03.offsetTop;
-            // let contTop = cont.offsetTop;
-            // let contItem = document.querySelector('.section01')
-            // let sec2title = document.querySelector('.section02 .title');
-            // console.log(cont.offsetTop);
 
             /* 스크롤 시 헤더 나타나고 사라지기 */
             window.addEventListener('wheel', (event) => {
@@ -141,10 +143,10 @@
                 }
             });
 
-            /* section01 스크롤 시 백그라운드 변화 */
+
             window.addEventListener('scroll', () => {
+                /* section01 스크롤 시 백그라운드 변화 */
                 let scrollBar = window.scrollY;
-                console.log(scrollBar);
 
                 for (let i = 0; i < item.length; i++) {
                     let itemTop = item[i].offsetTop;
@@ -161,6 +163,65 @@
                         item[i].classList.add('on');
                     }
                 };
+                console.log(scrollBar);
+                /* 스크롤 시 위치값에 따라 콘텐츠 나타내기 */
+                let section02 = document.querySelector('.section02');
+                let section02Item = document.querySelectorAll('.section02 .item');
+                let section03 = document.querySelector('.section03');
+
+                if ($(window).width() > 1080) {
+                    /* section02 */
+                    if (2400 < scrollY) {
+                        section02.classList.add('scroll_on');
+                        /* 아이템 순서대로 나타내기 */
+                        section02Item.forEach((item, index) => {
+                            item.classList.add('on' + index, 'scroll_on');
+                        });
+
+                    } else {
+                        section02.classList.remove('scroll_on');
+                        /* 아이템 순서대로 나타내기 */
+                        section02Item.forEach((item) => {
+                            item.classList.remove('on', 'scroll_on');
+                        });
+                    }
+                    /* section03 */
+                    if (3100 < scrollY) {
+                        section03.classList.add('scroll_on');
+                    } else {
+                        section03.classList.remove('scroll_on');
+                    }
+                };
+                if ($(window).width() < 1024) {
+                    section02.classList.add('scroll_on');
+                    section03.classList.add('scroll_on');
+                    section02Item.forEach((item, index) => {
+                        item.classList.add('on' + index, 'scroll_on');
+                    });
+                }
+                if ($(window).width() >= 1024) {
+                    /* section02 */
+                    if (2200 < scrollY) {
+                        section02.classList.add('scroll_on');
+                        /* 아이템 순서대로 나타내기 */
+                        section02Item.forEach((item, index) => {
+                            item.classList.add('on' + index, 'scroll_on');
+                        });
+
+                    } else {
+                        section02.classList.remove('scroll_on');
+                        /* 아이템 순서대로 나타내기 */
+                        section02Item.forEach((item) => {
+                            item.classList.remove('on', 'scroll_on');
+                        });
+                    }
+                    /* section03 */
+                    if (2800 < scrollY) {
+                        section03.classList.add('scroll_on');
+                    } else {
+                        section03.classList.remove('scroll_on');
+                    }
+                }
             });
 
             /* 언어 변경 클릭 시 2차메뉴 생성 */
