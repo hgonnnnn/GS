@@ -15,20 +15,110 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script> //jquery
+
+        /* 맨 상단으로 올라가는 버튼 */
         $(function () {
-            let Top = $('.jquery_btn');
-            Top.click(function () {
+            let topBtn = $('.jquery_btn');
+            let menuIcon = $('.menu');
+            let mobileDepth01 = $('.mobile_nav .gnb > li .depth01')
+            let mobileDepth02 = $('.mobile_nav .gnb li > .depth02')
+            let header = document.querySelector('.header');
+
+            /* 상단으로 올라가는 버튼 */
+            topBtn.click(function () {
                 $('html, body').animate({
                     scrollTop: 0
-                });
+                }, 700);
+                $('.header').removeClass('on');
             });
-        });
+
+            /* 상단버튼 사라졌다 없애기 */
+            $(window).scroll(function () {
+                // scrollTop() = 스크롤바 값
+                if ($(window).scrollTop() > 0) {
+                    topBtn.css({
+                        'display': 'block'
+                    });
+                } else {
+                    topBtn.css({
+                        'display': 'none'
+                    })
+                }
+            });
+
+            /* 모바일메뉴 옆 공간을 눌러도 닫아짐 */
+            $('.bgg').click(function () {
+                $('.bgg').removeClass('on');
+                $('.mobile_nav').slideUp();
+                $('html, body').removeClass('on');
+                $('.menu_img').attr('src', 'img/icons8-메뉴-32.png');
+                $('.header').removeAttr('style');
+                // $('body').off('scroll touchmove mousewheel')
+            })
+
+            /* 메뉴버튼 클릭 시 모바일메뉴 나타내기 */
+            $('.menu').click(function () {
+
+                /* 모바일nav 나타났을 때 스크롤 막기 */
+                if ($('.mobile_nav').css('display') === 'none') {
+                    /* 모바일 메뉴 활성화 시 스크롤 막는법 */
+                    $('.header').css({
+                        'opacity': '1',
+                        'transform': 'translateY(0)'
+                    })
+                } else {
+                    $('.header').removeAttr('style');
+                }
+                
+                $('.mobile_nav').slideToggle();
+                $('.bgg').toggleClass('on');
+                $('html, body').toggleClass('on');
+                // $('body').on('scroll touchmove mousewheel', function(){
+                //     return false;
+                // });
+                
+                // 2차메뉴 열고 닫아도 초기화 되도록 설정
+                mobileDepth01.css({
+                    'color': '#000'
+                })
+                mobileDepth02.css({
+                    'display': 'none',
+                })
+
+                if ($('.menu_img').attr('src') === 'img/icons8-메뉴-32.png') {
+                    $('.menu_img').attr('src', 'img/icons8-지우다-48.png');
+                } else {
+                    $('.menu_img').attr('src', 'img/icons8-메뉴-32.png');
+                }
+            });
+            /* 1차메뉴 클릭 시 2차메뉴 나타내기 */
+            mobileDepth01.click(function () {
+                if ($(this).next().css('display') === 'none') {
+                    // alert();
+                    mobileDepth02.slideUp();
+                    $(this).next().slideDown();
+
+                    mobileDepth01.css({
+                        'color': '#000'
+                    })
+                    $(this).css({
+                        'color': '#F5B01E'
+                    })
+                } else {
+                    $(this).next().slideUp();
+                    $(this).css({
+                        'color': '#000'
+                    })
+                }
+            });
+
+        });//script end
     </script>
     <script>
         window.onload = () => {
             let depth01 = document.querySelectorAll('.gnb > li ');
             let depth02 = document.querySelectorAll('.depth02');
-            let lang = document.querySelector('.lang');
+            let lang = document.querySelector('.lang > li');
             let section01 = document.querySelector('.section01');
             let bg = document.querySelectorAll('.bg div');
             let item = document.querySelectorAll('.section01 .item');
@@ -41,6 +131,7 @@
             // let sec2title = document.querySelector('.section02 .title');
             // console.log(cont.offsetTop);
 
+            /* 스크롤 시 헤더 나타나고 사라지기 */
             window.addEventListener('wheel', (event) => {
                 let wheelscroll = event.deltaY;
                 if (wheelscroll > 0) {
@@ -48,8 +139,9 @@
                 } else {
                     header.classList.remove('on');
                 }
-            }); //헤더 나타나고 사라지기
+            });
 
+            /* section01 스크롤 시 백그라운드 변화 */
             window.addEventListener('scroll', () => {
                 let scrollBar = window.scrollY;
                 console.log(scrollBar);
@@ -69,24 +161,14 @@
                         item[i].classList.add('on');
                     }
                 };
+            });
 
-                // if(section03Top <= scrollBar) {
-                //     section03Item.forEach((item) => {
-                //         item.classList.add('on');
-                //     })
-                // }else if (scrollBar === 0) {
-                //     section03Item.forEach((item) => {
-                //         item.classList.remove('on');
-                //     })
-                // }
-
-            }); // 스크롤 시 백그라운드 변화
-
+            /* 언어 변경 클릭 시 2차메뉴 생성 */
             lang.addEventListener('click', () => {
                 lang.classList.toggle('on'); // toggle => 버튼형식 add, remove 가능
             });
 
-
+            /* 헤더 2차메뉴 hover */
             for (let i = 0; i < depth01.length; i++) {
                 depth01[i].addEventListener('mouseenter', () => {
                     depth01.forEach((depth01Index) => {
@@ -107,8 +189,9 @@
                         depth02Index.classList.remove('on');
                     });
                 });
-            } // 헤더 2차메뉴 hover
+            }
 
+            /* 슬라이드 스와이퍼 */
             const progressCircle = document.querySelector(".autoplay-progress svg");
             const progressContent = document.querySelector(".autoplay-progress span");
             var swiper = new Swiper(".Swiper01", {
@@ -139,9 +222,12 @@
 
 <body>
     <button class="jquery_btn">
-        <img src="img/icons8-원-셰브론-up-48.png" alt="">
+        <img src="img/icons8-쪽으로-48.png" alt="">
     </button><!-- .jquery_btn end -->
     <header class="header">
+        <div class="bgg">
+            <span>백그라운드</span>
+        </div>
         <div class="inner">
             <figure class="logo">
                 <a href="#">
@@ -224,18 +310,18 @@
                         </ul>
                     </li>
                     <button class="menu pc">
-                        <img src="img/icons8-메뉴-32.png" alt="">
+                        <img src="img/icons8-메뉴-32.png" class="menu_img" alt="">
                     </button>
                 </ul><!-- .lang end -->
             </div><!-- .util end -->
 
-            <button class="menu_open mobile">
+            <!-- <button class="menu_open mobile">
                 <img src="img/icons8-메뉴-32.png" alt="">
-            </button>
+            </button> -->
             <nav class="mobile_nav mobile">
-                <button class="close">
+                <!-- <button class="close">
                     <img src="img/icons8-지우다-48.png" alt="">
-                </button>
+                </button> -->
                 <ul class="gnb">
                     <li>
                         <a href="#" class="depth01">Company</a>
@@ -342,6 +428,8 @@
             <span></span>
         </div>
     </div><!-- .Swiper01 end -->
+
+
 
     <section class="section01">
         <div class="bg">
@@ -482,7 +570,7 @@
                     <span>법적고지</span>
                     <span>이메일부단수집거부</span>
                 </p>
-                <p><span>서울시 강남구 논현로 508 (역삼동 GS타워)</span>
+                <p><span>서울시 강남구 논현로 508 (역삼동 GS타워)</span><br>
                     <span>Email : gsenergy@gsenergy.co.kr</span>
                 </p>
             </div><!-- .left end -->
