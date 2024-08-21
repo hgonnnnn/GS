@@ -99,6 +99,8 @@ body.on {
     bottom: 50px;
     right: 60px;
     z-index: 9;
+    
+    display: none;
     /* padding: 2px; */
     /* box-shadow: 0 2cm 5px; */
 }
