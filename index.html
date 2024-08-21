@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GS에너지 모작</title>
     <link rel="stylesheet" href="css/style.css">
+    <!-- <link rel="stylesheet" href="css/swiper-bundle.min.css"> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <!-- 슬라이드 -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -258,6 +259,7 @@
             var swiper = new Swiper(".Swiper01", {
                 spaceBetween: 30,
                 centeredSlides: true,
+                speed:900,
                 autoplay: {
                     delay: 2500,
                     disableOnInteraction: false
@@ -483,8 +485,8 @@
         <div class="swiper-button-prev"></div>
         <div class="swiper-pagination"></div>
         <div class="autoplay-progress">
-            <svg viewBox="0 0 48 48">
-                <circle cx="24" cy="24" r="20"></circle>
+            <svg viewBox="0 0 100 10">
+                <line x1="0" y1="0" x2="100" y2="0"></line>
             </svg>
             <span></span>
         </div>
