@@ -632,6 +632,7 @@ video {
 .section03 .inner .title,
 .section04 .inner .title
  {
+    cursor: default;
     margin-bottom: 45px;
 }
 .section03 .inner .title p,
