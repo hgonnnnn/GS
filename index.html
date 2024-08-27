@@ -6,16 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GS에너지 모작</title>
     <link rel="stylesheet" href="css/style.css">
-    <!-- <link rel="stylesheet" href="css/swiper-bundle.min.css"> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
     <!-- 슬라이드 -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <!-- 업버튼 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <script> //jquery
+    <script>
 
 
         $(function () {
@@ -121,6 +120,38 @@
                     })
                 }
             });
+            /* media 슬라이드 */
+            var swiper = new Swiper('.media', {
+                slidesPerView: 2,
+                // direction: getDirection(),
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                // on: {
+                //     resize: function () {
+                //         swiper.changeDirection(getDirection());
+                //     },
+                // },
+                breakpoints: {
+                    1090: {
+                        slidesPerView: 4,
+                    },
+                    780: {
+                        slidesPerView: 3,
+                    },
+                    600: {
+                        slidesPerView: 2.5,
+                    },
+                },
+            });
+
+            // function getDirection() {
+            //     var windowWidth = window.innerWidth;
+            //     var direction = window.innerWidth <= 760 ? 'vertical' : 'horizontal';
+
+            //     return direction;
+            // }
 
         });//script end
     </script>
@@ -259,7 +290,7 @@
             var swiper = new Swiper(".Swiper01", {
                 spaceBetween: 30,
                 centeredSlides: true,
-                speed:900,
+                speed: 900,
                 autoplay: {
                     delay: 2500,
                     disableOnInteraction: false
@@ -620,6 +651,76 @@
 
         </div><!-- .inner end -->
     </section><!-- .section03 end -->
+
+    <section class="section04">
+        <div class="inner">
+            <div class="title">
+                <p>Media</p>
+                <h2>GS 에너지 소식</h2>
+            </div><!-- .title end -->
+            <div class="swiper media">
+                <div class="swiper-wrapper">
+
+                    <div class="swiper-slide">
+                        <div class="item">
+                        <a href="#">보도자료 <img src="img/Vector-3 1.svg" alt="바로가기"></a>
+                        <strong>GS에너지, 롯데케미칼과 함께 전라남도 & 여수시와 8천억원 투자협약 체결</strong>
+                        <p>2019.12.10</p>
+                        <img src="img/no_image.jpg" alt="이미지">
+                    </div><!-- .item end -->
+                </div><!-- .swiper_slide end -->
+
+                    <div class="swiper-slide">
+                        <div class="item">
+                        <a href="#">보도자료 <img src="img/Vector-3 1.svg" alt="바로가기"></a>
+                        <strong>신평택발전(주) 발전소 준공식 개최</strong>
+                        <p>2019.11.29</p>
+                        <img src="img/no_image.jpg" alt="이미지">
+                    </div><!-- .item end -->
+                </div><!-- .swiper_slide end -->
+
+                    <div class="swiper-slide">
+                        <div class="item">
+                        <a href="#">보도자료 <img src="img/Vector-3 1.svg" alt="바로가기"></a>
+                        <strong>GS에너지, 베트남에 대규모 LNG발전사업 추진... 해외진출 박차</strong>
+                        <p>2019.11.28</p>
+                        <img src="img/no_image.jpg" alt="이미지">
+                    </div><!-- .item end -->
+                </div><!-- .swiper_slide end -->
+
+                    <div class="swiper-slide">
+                        <div class="item">
+                        <a href="#">보도자료 <img src="img/Vector-3 1.svg" alt="바로가기"></a>
+                        <strong>GS에너지,롯데케미칼 8000억원 규모 석유화학사업 합작 추진</strong>
+                        <p>2019.07.16</p>
+                        <img src="img/media01.jpg" alt="이미지">
+                    </div><!-- .item end -->
+                </div><!-- .swiper_slide end -->
+
+                    <div class="swiper-slide">
+                        <div class="item">
+                        <a href="#">보도자료 <img src="img/Vector-3 1.svg" alt="바로가기"></a>
+                        <strong>GS에너지·한국석유공사, UAE 할리바 유전 원유 생산 개시</strong>
+                        <p>2019.07.11</p>
+                        <img src="img/media03.jpg" alt="이미지">
+                    </div><!-- .item end -->
+                </div><!-- .swiper_slide end -->
+
+                    <div class="swiper-slide">
+                        <div class="item">
+                        <a href="#">보도자료 <img src="img/Vector-3 1.svg" alt="바로가기"></a>
+                        <strong>GS에너지, 아부다비국영석유회사와 에너지사업 협력 확대</strong>
+                        <p>2019.03.04</p>
+                        <img src="img/media02.jpg" alt="이미지">
+                    </div><!-- .item end -->
+                </div><!-- .swiper_slide end -->
+
+
+                </div><!-- .swiper_wrapper end -->
+            </div><!-- .swiper end -->
+
+        </div><!-- .inner end -->
+    </section><!-- .section04 end -->
 
     <footer class="footer">
         <div class="inner">
